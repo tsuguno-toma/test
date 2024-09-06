@@ -39,7 +39,7 @@
             <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}" x:Name="lstNames2" Grid.Column="2" Margin="5,0,0,0" SelectionChanged="lstNames2_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="管番号" Binding="{Binding PipeNo}"/>
-                    <DataGridTextColumn  Header="ベンディング明細伝票の日付" Binding="{Binding BendingDate}"/>
+                    <DataGridTextColumn  Header="ベンディング明細伝票の日付" Binding="{Binding BendingDate,StringFormat={}{0:dd/MM/yyyy}}"/>
                 </DataGrid.Columns>
             </DataGrid>
             
