@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:ベンディング検査"
         mc:Ignorable="d"
         Title="ベンディング検査" Height="768" Width="1366">
+    <Window.DataContext>
+        <local:MainViewModel></local:MainViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid Margin="10">
 
@@ -21,14 +24,25 @@
             </Grid.ColumnDefinitions>
 
             <Label>受注＆作業Ｏ/＃</Label>
-            <ListBox Grid.Row="1" x:Name="lstNames" />
+            <DataGrid Grid.Row="1" x:Name="lstNames" AutoGenerateColumns="False" SelectedItem="{Binding SelectedOrder,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding  OrderList , UpdateSourceTrigger=PropertyChanged}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Header="受注O/#" Binding="{Binding OrderNumder}"/>
+                    <DataGridTextColumn  Header="客先名" Binding="{Binding ClientName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
                 <TextBox x:Name="fpath" AllowDrop="True" PreviewDragOver="Excelpath_DragOver" Drop="Excelpath_Drop" TextChanged="Excelpath_TextChanged" />
                 <Button x:Name="jsorder" Margin="0,5,0,0" Click="jsorder_Click">受注＆作業Ｏ/＃検索</Button>
             </StackPanel>
 
-            <ListBox Grid.Row="1" x:Name="lstNames2" Grid.Column="2" Margin="5,0,0,0" SelectionChanged="lstNames2_SelectionChanged" />
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}" x:Name="lstNames2" Grid.Column="2" Margin="5,0,0,0" SelectionChanged="lstNames2_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Header="管番号" Binding="{Binding PipeNo}"/>
+                    <DataGridTextColumn  Header="ベンディング明細伝票の日付" Binding="{Binding BendingDate}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
 
             <Label Content="↓検査明細検索フォルダ" Grid.Column="1"></Label>
             <Label Content="↓管番号" Grid.Column="2" Margin="5,0,0,0"/>
