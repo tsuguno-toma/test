@@ -1,0 +1,38 @@
+﻿<Window x:Class="ベンディング検査.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ベンディング検査"
+        mc:Ignorable="d"
+        Title="ベンディング検査" Height="768" Width="1366">
+    <Grid>
+        <Grid Margin="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label>受注＆作業Ｏ/＃</Label>
+            <ListBox Grid.Row="1" x:Name="lstNames" />
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
+                <TextBox x:Name="fpath" AllowDrop="True" PreviewDragOver="Excelpath_DragOver" Drop="Excelpath_Drop" TextChanged="Excelpath_TextChanged" />
+                <Button x:Name="jsorder" Margin="0,5,0,0" Click="jsorder_Click">受注＆作業Ｏ/＃検索</Button>
+            </StackPanel>
+
+            <ListBox Grid.Row="1" x:Name="lstNames2" Grid.Column="2" Margin="5,0,0,0" SelectionChanged="lstNames2_SelectionChanged" />
+
+            <Label Content="↓検査明細検索フォルダ" Grid.Column="1"></Label>
+            <Label Content="↓管番号" Grid.Column="2" Margin="5,0,0,0"/>
+
+        </Grid>
+    </Grid>
+</Window>
