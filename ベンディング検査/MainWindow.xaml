@@ -1,14 +1,15 @@
-﻿<Window x:Class="ベンディング検査.MainWindow"
+﻿<Window xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  x:Class="BendingCheck.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ベンディング検査"
+        xmlns:bendingcheck="clr-namespace:BendingCheck"
         mc:Ignorable="d" DataContextChanged="Window_DataContextChanged"
         Title="ベンディング検査" Height="768" Width="1366">
 
     <Window.DataContext>
-        <local:MainViewModel></local:MainViewModel>
+        <bendingcheck:MainViewModel></bendingcheck:MainViewModel>
     </Window.DataContext>
     <Window.Resources>
         <Style TargetType="Label">
@@ -23,6 +24,38 @@
         <Style TargetType="DataGrid">
             <Setter Property="FontSize" Value="20" />
         </Style>
+        <Style TargetType="dxg:TableView">
+            <Setter Property="AllowFilterEditor" Value="true" ></Setter>
+            <Setter Property="FontSize" Value="18" ></Setter>
+            <Setter Property="RowMinHeight" Value="18" ></Setter>
+            <Setter Property="AlternateRowBackground" Value="LightYellow" ></Setter>
+            <Setter Property="ShowAutoFilterRow" Value="True" ></Setter>
+            <Setter Property="IndicatorWidth" Value="50" ></Setter>
+        </Style>
+      
+        
+        <Style TargetType="dxg:BaseGridHeader" x:Key="header">
+            <Setter Property="dxg:BaseGridColumnHeader.ShowFilterButtonOnHover" Value="False" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{StaticResource MaterialDesignBodyLight}" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <bendingcheck:HandleToIndexConverter x:Key="conv" />
+      
+        <DataTemplate x:Key="mytemp">        
+               
+                <TextBlock VerticalAlignment="Center" TextAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource conv}">
+                            <Binding Path="RowHandle.Value" />
+                            <Binding Path="View.Grid" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>            
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid Margin="10">
@@ -36,7 +69,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,0">
@@ -44,14 +77,93 @@
                 <Button x:Name="jsorder" Margin="0,5.0,0,0" Click="jsorder_Click">受注＆作業Ｏ/＃検索</Button>
             </StackPanel>
 
-            <DataGrid Grid.Row="2" x:Name="lstNames" AutoGenerateColumns="False" SelectedItem="{Binding SelectedOrder,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding  OrderList , UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF688CAF" Background="#7FF0FFDC" Margin="0,0,0,0" >
+            <dxg:GridControl Grid.Row="2" SelectedItem="{Binding SelectedOrder,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding  OrderList , UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF688CAF" Background="#7FF0FFDC" Margin="0,0,0,0" >
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                       
+                       >
+                        <dxg:TableView.ColumnHeaderStyle >
+                            <Style TargetType="dxg:BaseGridHeader" >
+                                <Setter Property="dxg:BaseGridColumnHeader.ShowFilterButtonOnHover" Value="False" />                              
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="{StaticResource MaterialDesignBodyLight}" />
+                                <Setter Property="Height" Value="30" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="0" />
+                            </Style>
+                        </dxg:TableView.ColumnHeaderStyle>
+
+                        <dxg:TableView.RowIndicatorContentTemplate   >
+                            <DataTemplate>                               
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource conv}">
+                                            <Binding Path="RowHandle.Value" />
+                                            <Binding Path="View.Grid" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </dxg:TableView.RowIndicatorContentTemplate>
+
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn
+                    Width="2*"
+                    AllowEditing="True"
+                        Header="受注O/#" Binding="{Binding OrderNumder}"                 
+                        />
+
+                    <dxg:GridColumn
+                    Width="5*"
+                         Header="客先名" Binding="{Binding ClientName}"
+                  />
+                        <dxg:GridColumn
+                    Width="*"
+                         Header="材料" Binding="{Binding Material}"
+                           />   
+                    
+                    <dxg:GridColumn
+                    Width="*"
+                         Header="外径" Binding="{Binding Diameter}"
+                           />
+                      <dxg:GridColumn
+                    Width="*"
+                         Header="肉厚" Binding="{Binding ThickNess}"
+                           />      
+                    <dxg:GridColumn
+                    Width="*"
+                         Header="曲げ数" Binding="{Binding BendNumber}"
+                           />   
+                    <dxg:GridColumn
+                    Width="*"
+                         Header="作成" Binding="{Binding Creator}"
+                           />
+                      <dxg:GridColumn
+                    Width="*"
+                         Header="納期" Binding="{Binding DueDay}"
+                           />
+                    
+                
+
+
+
+                </dxg:GridControl.Columns>
+
+             
+
+            </dxg:GridControl>
+            <!--<DataGrid Grid.Row="2" x:Name="lstNames" AutoGenerateColumns="False" SelectedItem="{Binding SelectedOrder,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding  OrderList , UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF688CAF" Background="#7FF0FFDC" Margin="0,0,0,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="受注O/#" Binding="{Binding OrderNumder}"/>
                     <DataGridTextColumn  Header="客先名" Binding="{Binding ClientName}"/>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
 
-            <DataGrid Grid.Row="3" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPipe,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}"  x:Name="lstNames2" Margin="0,5,0,0" SelectionChanged="lstNames2_SelectionChanged" Background="#FFE7FFC8" Grid.ColumnSpan="1">
+            <!--<DataGrid Grid.Row="3" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPipe,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}"  x:Name="lstNames2" Margin="0,5,0,0" SelectionChanged="lstNames2_SelectionChanged" Background="#FFE7FFC8" Grid.ColumnSpan="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="管番号" Binding="{Binding PipeNo}"/>
                     <DataGridTextColumn  Header="伝票の日付" Binding="{Binding BendingDate,StringFormat={}{0:dd/MM/yyyy}}"/>
@@ -62,7 +174,69 @@
                         <MenuItem Header="開く" Name="Register" Click="MenuItem_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
-            </DataGrid>
+            </DataGrid>-->
+
+            <dxg:GridControl Grid.Row="3" SelectedItem="{Binding SelectedPipe,UpdateSourceTrigger=PropertyChanged}" 
+                             ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}"   
+                             Margin="0,5,0,0"  Background="#FFE7FFC8" Grid.ColumnSpan="1" >
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                       
+                       >
+                        <dxg:TableView.ColumnHeaderStyle  >
+                            <Style TargetType="dxg:BaseGridHeader">
+                                <Setter Property="dxg:BaseGridColumnHeader.ShowFilterButtonOnHover" Value="False" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="{StaticResource MaterialDesignBodyLight}" />
+                                <Setter Property="Height" Value="30" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="0" />
+                            </Style>
+                        </dxg:TableView.ColumnHeaderStyle>
+
+                        <dxg:TableView.RowIndicatorContentTemplate   >
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource conv}">
+                                            <Binding Path="RowHandle.Value" />
+                                            <Binding Path="View.Grid" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </dxg:TableView.RowIndicatorContentTemplate>
+
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn
+                    Width="*"
+                    AllowEditing="True"
+                       Header="管番号" Binding="{Binding PipeNo}"                 
+                        />
+
+                    <dxg:GridColumn
+                    Width="*"
+                    AllowEditing="False"
+                       Header="伝票の日付" Binding="{Binding BendingDate,StringFormat={}{0:dd/MM/yyyy}}"
+                  />
+                   
+                    <dxg:GridColumn
+                    Width="2*"                 
+                      Header="PDF" Binding="{Binding FileName}"                 
+                        />
+                    
+                    
+
+
+                </dxg:GridControl.Columns>
+
+
+
+            </dxg:GridControl>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
                 

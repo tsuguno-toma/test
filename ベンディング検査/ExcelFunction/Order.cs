@@ -5,18 +5,30 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ベンディング検査.ExcelFunction
+namespace ExcelFunction
 {
     public class Order
     {
 
-        public Order(string order,string client) 
+        public Order(string order,string client, string material, double dia, double t, string bend, string creater, DateTime day ) 
         { 
             OrderNumder = order;
             ClientName = client;
+            Material = material;
+            Diameter = dia;
+            ThickNess = t;
+            BendNumber = bend;
+            Creator = creater;
+            DueDay = day;
         }
         public string OrderNumder { get; set; }
         public string ClientName { get; set; }
+        public string Material { get; set; }
+        public double Diameter { get; set; }
+        public double ThickNess { get; set; }
+        public string BendNumber { get; set; }
+        public string Creator { get; set; }
+        public DateTime DueDay { get; set; }
     }
 
     public class Pipe

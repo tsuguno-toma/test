@@ -1,4 +1,5 @@
 ﻿
+using BendingCheck;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using TextBox = System.Windows.Controls.TextBox;
 
-namespace ベンディング検査
+namespace BendingCheck
 {
 	/// <summary>
 	/// MainWindow.xaml の相互作用ロジック
@@ -36,26 +37,26 @@ namespace ベンディング検査
 		private void jsorder_Click(object sender, RoutedEventArgs e)
 		{
 			// テキストボックスが空の場合にファイル選択ダイアログを開く
-			if (string.IsNullOrEmpty(fpath.Text))
-			{
-				OpenFileDialog openFileDialog = new OpenFileDialog();
-				openFileDialog.Filter = "Excelファイル (*.xlsx;*.xls;*.xlsm)|*.xlsx;*.xls;*.xlsm";
-				openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+			//if (string.IsNullOrEmpty(fpath.Text))
+			//{
+			//	OpenFileDialog openFileDialog = new OpenFileDialog();
+			//	openFileDialog.Filter = "Excelファイル (*.xlsx;*.xls;*.xlsm)|*.xlsx;*.xls;*.xlsm";
+			//	openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-				if (openFileDialog.ShowDialog() == true)
-				{
-					// 選択されたファイルのパスをテキストボックスに設定
-					fpath.Text = openFileDialog.FileName;
-				}
-			}
+			//	if (openFileDialog.ShowDialog() == true)
+			//	{
+			//		// 選択されたファイルのパスをテキストボックスに設定
+			//		fpath.Text = openFileDialog.FileName;
+			//	}
+			//}
 
-			if (!string.IsNullOrWhiteSpace(fpath.Text) && !lstNames.Items.Contains(fpath.Text))
-			{
-				// テキストボックスから Excel ファイルのパスを取得
-				string excelFilePath = fpath.Text.Replace("\"", "");
+			//if (!string.IsNullOrWhiteSpace(fpath.Text) && !lstNames.Items.Contains(fpath.Text))
+			//{
+			//	// テキストボックスから Excel ファイルのパスを取得
+			//	string excelFilePath = fpath.Text.Replace("\"", "");
 
 
-			}
+			//}
 
 			
 		}

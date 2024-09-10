@@ -1,15 +1,18 @@
-﻿using MaterialDesignDemo.Domain;
+﻿using DevExpress.Xpf.Grid;
+using ExcelFunction;
+using MaterialDesignDemo.Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ベンディング検査.ExcelFunction;
+using System.Windows.Data;
 
-namespace ベンディング検査
+namespace BendingCheck
 {
     public class MainViewModel:ViewModelBase
     {
@@ -89,4 +92,30 @@ namespace ベンディング検査
         }
 
 	}
+
+    public class HandleToIndexConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+
+
+                var handle = (int)values[0];
+                var grid = (GridControl)values[1];
+                var val = grid.GetRowVisibleIndexByHandle(handle) + 1;
+                if (val > 0) return val.ToString();
+                else return "";
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+    }
+
 }
