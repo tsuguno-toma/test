@@ -79,5 +79,17 @@ namespace ベンディング検査
         {
 
         }
-    }
+
+		private void MenuItem_Click(object sender, RoutedEventArgs e)
+		{
+			viewmodel.OpenPDF();
+		}
+
+		MainViewModel viewmodel;
+		private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+
+			viewmodel = this.DataContext as MainViewModel;
+		}
+	}
 }

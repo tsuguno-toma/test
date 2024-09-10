@@ -56,8 +56,10 @@ namespace ベンディング検査.ExcelFunction
                     PipeList.Add( new Pipe(
                         ws.Cells[i, 1].Value.ToString().Trim(),
                         ws.Cells[i, 2].Value.ToString().Trim(),
-                        date
-                        ));
+                        date,
+						 ws.Cells[i, 4].Value==null?"": ws.Cells[i, 4].Value.ToString().Trim()
+
+						));
                 }
                 return (OrderList, PipeList);
 

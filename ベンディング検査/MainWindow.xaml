@@ -4,49 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ベンディング検査"
-        mc:Ignorable="d"
+        mc:Ignorable="d" DataContextChanged="Window_DataContextChanged"
         Title="ベンディング検査" Height="768" Width="1366">
+
     <Window.DataContext>
         <local:MainViewModel></local:MainViewModel>
     </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style BasedOn="{StaticResource MaterialDesignFlatMidBgButton}" TargetType="Button">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid Margin="10">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="1.2*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label>受注＆作業Ｏ/＃</Label>
-            <DataGrid Grid.Row="1" x:Name="lstNames" AutoGenerateColumns="False" SelectedItem="{Binding SelectedOrder,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding  OrderList , UpdateSourceTrigger=PropertyChanged}" >
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,0">
+                <TextBox x:Name="fpath" AllowDrop="True" PreviewDragOver="Excelpath_DragOver" Drop="Excelpath_Drop" TextChanged="Excelpath_TextChanged" />
+                <Button x:Name="jsorder" Margin="0,5.0,0,0" Click="jsorder_Click">受注＆作業Ｏ/＃検索</Button>
+            </StackPanel>
+
+            <DataGrid Grid.Row="2" x:Name="lstNames" AutoGenerateColumns="False" SelectedItem="{Binding SelectedOrder,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding  OrderList , UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF688CAF" Background="#7FF0FFDC" Margin="0,0,0,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="受注O/#" Binding="{Binding OrderNumder}"/>
                     <DataGridTextColumn  Header="客先名" Binding="{Binding ClientName}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
-                <TextBox x:Name="fpath" AllowDrop="True" PreviewDragOver="Excelpath_DragOver" Drop="Excelpath_Drop" TextChanged="Excelpath_TextChanged" />
-                <Button x:Name="jsorder" Margin="0,5,0,0" Click="jsorder_Click">受注＆作業Ｏ/＃検索</Button>
-            </StackPanel>
-
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}" x:Name="lstNames2" Grid.Column="2" Margin="5,0,0,0" SelectionChanged="lstNames2_SelectionChanged" >
+            <DataGrid Grid.Row="3" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPipe,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding PipeList, UpdateSourceTrigger=PropertyChanged}"  x:Name="lstNames2" Margin="0,5,0,0" SelectionChanged="lstNames2_SelectionChanged" Background="#FFE7FFC8" Grid.ColumnSpan="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="管番号" Binding="{Binding PipeNo}"/>
-                    <DataGridTextColumn  Header="ベンディング明細伝票の日付" Binding="{Binding BendingDate,StringFormat={}{0:dd/MM/yyyy}}"/>
+                    <DataGridTextColumn  Header="伝票の日付" Binding="{Binding BendingDate,StringFormat={}{0:dd/MM/yyyy}}"/>
+                    <DataGridTextColumn  Header="PDF" Binding="{Binding FileName}"/>
                 </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="開く" Name="Register" Click="MenuItem_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
-            
 
-            <Label Content="↓検査明細検索フォルダ" Grid.Column="1"></Label>
-            <Label Content="↓管番号" Grid.Column="2" Margin="5,0,0,0"/>
-
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
+                
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

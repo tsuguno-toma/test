@@ -35,6 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors">
+      <HintPath>\\FRUITBASKET2020\job file\0_當眞\【便利グッズ】\UI_Design\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf">
+      <HintPath>\\FRUITBASKET2020\job file\0_當眞\【便利グッズ】\UI_Design\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML">
+      <HintPath>\\FRUITBASKET2020\job file\0_當眞\【便利グッズ】\UI_Design\ShowMeTheXAML.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML.AvalonEdit">
+      <HintPath>\\FRUITBASKET2020\job file\0_當眞\【便利グッズ】\UI_Design\ShowMeTheXAML.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.InteropServices.WindowsRuntime" />
@@ -46,6 +58,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="VirtualizingWrapPanel">
+      <HintPath>\\FRUITBASKET2020\job file\0_當眞\【便利グッズ】\UI_Design\VirtualizingWrapPanel.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
