@@ -123,6 +123,26 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="ref\BluwolfIcons.dll" />
+    <Content Include="ref\DevExpress.Data.Desktop.v24.1.dll" />
+    <Resource Include="ref\DevExpress.Data.Desktop.v24.1.xml" />
+    <Content Include="ref\DevExpress.Data.v24.1.dll" />
+    <Resource Include="ref\DevExpress.Data.v24.1.xml" />
+    <Content Include="ref\DevExpress.Drawing.v24.1.dll" />
+    <Resource Include="ref\DevExpress.Drawing.v24.1.xml" />
+    <Content Include="ref\DevExpress.Mvvm.v24.1.dll" />
+    <Resource Include="ref\DevExpress.Mvvm.v24.1.xml" />
+    <Content Include="ref\DevExpress.Pdf.v24.1.Core.dll" />
+    <Resource Include="ref\DevExpress.Pdf.v24.1.Core.xml" />
+    <Content Include="ref\DevExpress.Pdf.v24.1.Drawing.dll" />
+    <Resource Include="ref\DevExpress.Pdf.v24.1.Drawing.xml" />
+    <Content Include="ref\DevExpress.Printing.v24.1.Core.dll" />
+    <Resource Include="ref\DevExpress.Printing.v24.1.Core.xml" />
+    <Content Include="ref\DevExpress.Xpf.Core.v24.1.dll" />
+    <Resource Include="ref\DevExpress.Xpf.Core.v24.1.xml" />
+    <Content Include="ref\DevExpress.Xpf.Grid.v24.1.Core.dll" />
+    <Resource Include="ref\DevExpress.Xpf.Grid.v24.1.Core.xml" />
+    <Content Include="ref\DevExpress.Xpf.Grid.v24.1.dll" />
+    <Resource Include="ref\DevExpress.Xpf.Grid.v24.1.xml" />
     <Content Include="ref\ICSharpCode.AvalonEdit.dll" />
     <Content Include="ref\MaterialDesignColors.dll" />
     <Content Include="ref\MaterialDesignThemes.Wpf.dll" />
