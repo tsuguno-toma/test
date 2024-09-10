@@ -40,7 +40,7 @@ namespace ExcelFunction
         {
             //   @"^\d{0,}.{0,1}\d{0,}$"
             if(string.IsNullOrEmpty(val)) return DateTime.MinValue;
-            var check = Regex.IsMatch(val.ToString().Trim(), @"\d{0,}");
+            var check = Regex.IsMatch(val.ToString().Trim(), @"^[0-9]$");
             if (check)
             {
                 long dateNum = long.Parse(val);
