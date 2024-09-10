@@ -39,7 +39,9 @@ namespace ExcelFunction
             public static DateTime ParseDateValue(this string val)
         {
             //   @"^\d{0,}.{0,1}\d{0,}$"
-            if(string.IsNullOrEmpty(val)) return DateTime.MinValue;
+
+            return new DateTime();
+            if (string.IsNullOrEmpty(val)) return DateTime.MinValue;
             var check = Regex.IsMatch(val.ToString().Trim(), @"^[0-9]{1,}$");
             if (check)
             {
